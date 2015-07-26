@@ -1,0 +1,9 @@
+# create new domain pppmodem
+type pppmodem, domain;
+type pppmodem_exec, exec_type, file_type;
+
+init_daemon_domain(pppmodem)
+
+allow pppmodem pppmodem_device:chr_file { read write ioctl open };
+allow pppmodem self:netlink_kobject_uevent_socket { read bind create };
+

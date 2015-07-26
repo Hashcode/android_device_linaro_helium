@@ -1,0 +1,19 @@
+# for debuggerd
+
+# /dev/__kmsg__
+access_kmsg(debuggerd)
+write_klog(debuggerd)
+
+allow debuggerd ctl_dumpstate_prop:property_service set;
+allow debuggerd debug_prop:property_service set;
+allow debuggerd device:dir { write remove_name add_name };
+allow debuggerd init:unix_stream_socket connectto;
+allow debuggerd property_socket:sock_file write;
+
+# TODO: debuggerd must create some device node. Is it necessary ?
+# default policy only allow several domain create device node
+# debuggerd is not one of them.
+# allow debuggerd self:capability mknod;
+# Limit device node creation to these whitelisted domains.
+# 	neverallow { domain -kernel -init -recovery -ueventd -watchdogd -healthd -vold -uncrypt } self:capability mknod;
+

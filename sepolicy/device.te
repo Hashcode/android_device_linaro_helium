@@ -1,0 +1,21 @@
+# define new device type
+type mediaserver_device, dev_type;
+type system_app_device, dev_type;
+type nvm_device, dev_type;
+type diag_device, dev_type;
+type atcmdsrv_device, dev_type;
+type eeh_device, dev_type;
+type pppmodem_device, dev_type;
+type marvelltel_device, dev_type;
+type radio_block_device, dev_type;
+type mrd_block_device, dev_type;
+type mrd1_block_device, dev_type;
+type teecsstdca_device, dev_type;
+type bluetooth_device, dev_type;
+type i2c_device, dev_type;
+type wpa_device, dev_type;
+type mrvlgpu_device, dev_type;
+
+# default policy already define nfd_device
+# so don't need to redefine here.
+

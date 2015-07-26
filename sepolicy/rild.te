@@ -1,0 +1,6 @@
+
+#tmpfs_domain(rild)
+allow rild rild_socket:sock_file write;
+allow rild atcmdsrv:unix_stream_socket connectto;
+allow rild tmpfs:sock_file write;
+

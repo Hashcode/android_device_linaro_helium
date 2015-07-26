@@ -1,0 +1,20 @@
+# for init
+# TODO: delete this line and setenforce 0 in init.xxx.security.rc
+permissive init;
+allow init self:capability sys_module;
+allow init self:process execmem;
+allow init self:tcp_socket create;
+
+allow init hawk:file { execute execute_no_trans };
+allow init run_hawk_on_boot:file { execute execute_no_trans };
+allow init touch_updater:file { execute execute_no_trans };
+
+# TODO:
+# In init.pxa1xxx.security.rc, we define "chmod 0700 /system/bin/teec_sstd_ca",
+# which has conflict with 290 line in domain.te :
+# 	Only recovery should be doing writes to /system
+# 		neverallow { domain -recovery } { system_file exec_type }:dir_file_class_set
+#    		{ create write setattr relabelfrom relabelto append unlink link rename };
+
+# allow init teecsstdca_exec:file setattr;
+

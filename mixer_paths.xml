@@ -1,0 +1,130 @@
+<mixer>
+	<!-- These are the initial mixer settings -->
+	<!-- general -->
+	<ctl name="MAP_TOP_CTRL_REG_1" value="0" />
+	<ctl name="MAP_ADC_VOLUME" value="0" />
+	<ctl name="d1in1_mix_enable Switch" value="0" />
+	<ctl name="MAP_DSP1_DAC_PROCESSING_REG" value="16" />
+	<ctl name="d2in1_mix_enable Switch" value="0" />
+	<ctl name="MAP_DSP2_DAC_PROCESSING_REG" value="0" />
+	<ctl name="MAP_DSP1_DAC_VOLUME" value="1" />
+	<ctl name="MAP_DSP2_DAC_VOLUME" value="1" />
+	<ctl name="MAP_DSP1_INMIX_COEF_REG" value="0" />
+	<ctl name="MAP_DSP2_INMIX_COEF_REG" value="0" />
+	<ctl name="MAP_INPUT_MIX_REG" value="0" />
+	<ctl name="dsp1_enable Switch" value="1" />
+	<ctl name="MAP_DSP1_DAC_CTRL_REG" value="0" />
+	<ctl name="PM860_VOL_SEL_3" value="0" />
+	<ctl name="PM860_VOL_SEL_4" value="0" />
+	<ctl name="PM822_MIS_CLASS_D_1" value="194" />
+	<ctl name="PM822_MIS_CLASS_D_2" value="16" />
+	<ctl name="PM822_CLASS_D_1" value="0" />
+	<ctl name="PM860_PDM_SETTINGS1" value="18" />
+	<ctl name="PM860_PDM_SETTINGS2" value="112" />
+	<ctl name="PM860_PDM_SETTINGS3" value="0" />
+	<ctl name="PM860_DIG_BLOCK_EN_REG1" value="0" />
+	<ctl name="PM860_DIG_BLOCK_EN_REG2" value="0" />
+	<ctl name="PM860_MAIN_POWER_REG" value="0" />
+
+	<path name="speaker">
+		<!-- codec output controls -->
+		<ctl name="MAP_TOP_CTRL_REG_1" value="3" />
+		<ctl name="MAP_ADC_VOLUME" value="1" />
+		<ctl name="d1in1_mix_enable Switch" value="1" />
+		<ctl name="MAP_DSP1_DAC_PROCESSING_REG" value="512" />
+		<ctl name="d2in1_mix_enable Switch" value="1" />
+		<ctl name="MAP_DSP2_DAC_PROCESSING_REG" value="512" />
+		<ctl name="dsp1_enable Switch" value="1" />
+		<ctl name="MAP_DSP1_DAC_CTRL_REG" value="3" />
+		<ctl name="PM860_MAIN_POWER_REG" value="1" />
+		<ctl name="PM860_DIG_BLOCK_EN_REG1" value="12" />
+		<ctl name="PM860_DIG_BLOCK_EN_REG2" value="1" />
+		<ctl name="PM860_PDM_SETTINGS3" value="49" />
+		<ctl name="PM860_PDM_SETTINGS2" value="42" />
+		<ctl name="PM860_PDM_SETTINGS1" value="201" />
+		<ctl name="PM822_CLASS_D_1" value="242" />
+		<ctl name="PM822_MIS_CLASS_D_1" value="198" />
+		<ctl name="PM860_VOL_SEL_4" value="200" />
+		<ctl name="PM860_VOL_SEL_3" value="200" />
+		<ctl name="MAP_DSP1_INMIX_COEF_REG" value="128" />
+		<ctl name="MAP_DSP1_DAC_VOLUME" value="15461121" />
+		<ctl name="MAP_DSP1_DAC_PROCESSING_REG" value="528" />
+	</path>
+</mixer>
+<!--
+tinymix settings:
+(NOT NEEDED)
+tinymix 35 120 0 7 0
+tinymix 36 3 1 32 0
+tinymix 49 32 1 26 0
+tinymix 50 33 0 0 0
+tinymix 54 5 0 0 0
+tinymix 56 252 11 80 0
+tinymix 57 72 0 0 0
+tinymix 63 0 90 185 17
+tinymix 67 48 0 1 16
+tinymix 68 16 0 0 0
+
+volume?
+tinymix 260 xx
+tinymix 261 xx
+
+STARTUP:
+MAP_TOP_CTRL_REG_1 = 0
+
+
+SPEAKER ON (depop?):
+MAP_TOP_CTRL_REG_1 = 3
+MAP_DSP1_DAC_VOLUME = 1
+MAP_DSP2_DAC_VOLUME = 1
+MAP_ADC_VOLUME = 1
+MAP_DSP1_INMIX_COEF_REG = 0
+MAP_DSP2_INMIX_COEF_REG = 0
+MAP_INPUT_MIX_REG = 0
+
+d1in1_mix_enable Switch = 1
+MAP_DSP1_DAC_PROCESSING_REG = 512
+
+d2in1_mix_enable Switch = 1
+MAP_DSP2_DAC_PROCESSING_REG = 512
+
+dsp1_enable Switch = 1
+MAP_DSP1_DAC_CTRL_REG = 3
+PM860_MAIN_POWER_REG = 1
+PM860_DIG_BLOCK_EN_REG1 = 12
+PM860_PDM_SETTINGS3 = 49
+PM860_PDM_SETTINGS2 = 42
+PM860_PDM_SETTINGS1 = 201
+PM822_CLASS_D_1 = 242
+PM822_MIS_CLASS_D_1 = 198
+PM860_VOL_SEL_4 = 182
+PM860_VOL_SEL_3 = 182
+MAP_DSP1_INMIX_COEF_REG = 128
+MAP_DSP1_DAC_VOLUME = 15461121
+MAP_DSP1_DAC_PROCESSING_REG = 528
+
+
+OFF:
+MAP_DSP1_INMIX_COEF_REG = 0
+d1in1_mix_enable Switch = 0
+MAP_DSP1_DAC_PROCESSING_REG = 16
+d2in1_mix_enable Switch = 0
+MAP_DSP2_DAC_PROCESSING_REG = 0
+MAP_DSP1_DAC_VOLUME = 1
+MAP_DSP1_DAC_PROCESSING_REG = 16
+
+
+dsp1_enable Switch = 0
+MAP_DSP1_DAC_CTRL_REG = 0
+PM822_MIS_CLASS_D_1 = 194
+PM822_MIS_CLASS_D_2 = 16
+PM822_CLASS_D_1 = 0
+PM860_VOL_SEL_3 = 0
+PM860_VOL_SEL_4 = 0
+PM860_PDM_SETTINGS1 = 18
+PM860_PDM_SETTINGS2 = 112
+PM860_PDM_SETTINGS3 = 0
+PM860_DIG_BLOCK_EN_REG1 = 0
+MAP_TOP_CTRL_REG_1 = 0
+PM860_MAIN_POWER_REG = 0
+//-->

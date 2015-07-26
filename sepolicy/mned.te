@@ -1,0 +1,12 @@
+# create new domain mned, NFC
+type mned, domain;
+type mned_exec, exec_type, file_type;
+
+init_daemon_domain(mned)
+
+allow mned system_data_file:dir { write add_name remove_name};
+allow mned system_data_file:sock_file { create setattr unlink };
+
+allow mned nfc_data_file:dir { write add_name remove_name search};
+allow mned nfc_data_file:sock_file { create setattr unlink };
+

@@ -1,0 +1,19 @@
+# for mediaserver
+allow mediaserver audio_data_file:dir remove_name;
+allow mediaserver audio_data_file:sock_file { create unlink setattr };
+allow mediaserver uio_device:chr_file { read write ioctl open };
+
+# access to /data/
+allow mediaserver system_data_file:file { open append create };
+allow mediaserver system_data_file:dir { write add_name };
+
+# relabel mediaserver_device
+allow mediaserver mediaserver_device:chr_file { read write open ioctl getattr };
+allow mediaserver nvm_data_file:file { read getattr open };
+allow mediaserver nvm_data_file:dir search;
+
+allow mediaserver phservice:binder call;
+allow mediaserver system_prop:property_service set;
+
+allow mediaserver mrvlgpu_device:chr_file { read write ioctl open };
+

@@ -1,0 +1,11 @@
+# create new domain teecsstdca
+
+type teecsstdca, domain;
+type teecsstdca_exec, exec_type, file_type;
+
+init_daemon_domain(teecsstdca)
+
+allow teecsstdca teecsstdca_device:chr_file { read write ioctl open };
+allow teecsstdca self:capability dac_override;
+allow teecsstdca shell_exec:file { read execute open execute_no_trans };
+

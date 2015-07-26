@@ -1,0 +1,11 @@
+# create the new domain phservice
+type phservice, domain;
+type phservice_exec, exec_type, file_type;
+
+init_daemon_domain(phservice)
+
+allow phservice servicemanager:binder { transfer call };
+allow phservice shell_exec:file { read execute open execute_no_trans };
+allow phservice sysfs:file write;
+allow phservice sysfs_devices_system_cpu:file write;
+

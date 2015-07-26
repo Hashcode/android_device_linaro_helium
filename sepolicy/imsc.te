@@ -1,0 +1,13 @@
+type imsc, domain;
+type imsc_exec, exec_type, file_type;
+
+init_daemon_domain(imsc)
+
+allow imsc pppmodem_device:chr_file { read write open ioctl};
+allow imsc self:capability net_admin;
+allow imsc self:key_socket { write read create };
+allow imsc self:netlink_route_socket { bind create };
+allow imsc self:tcp_socket create;
+allow imsc self:udp_socket create;
+allow imsc system_app_data_file:dir search;
+

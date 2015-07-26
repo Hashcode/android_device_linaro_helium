@@ -1,0 +1,12 @@
+# addtional permissions for nfc
+allow nfc mned:unix_stream_socket connectto;
+allow nfc mwirelessd:unix_stream_socket connectto;
+
+# relabel /data/nfc/* to specific label
+allow nfc nfc_data_file:dir { write add_name };
+allow nfc nfc_data_file:sock_file write;
+allow nfc nfc_data_file:file { write create };
+
+allow nfc nfc_device:chr_file { read write ioctl open };
+allow nfc wireless_data_file:sock_file write;
+

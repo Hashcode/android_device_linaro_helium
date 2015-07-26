@@ -1,0 +1,2 @@
+# grant addtional permission to platform_app
+allow platform_app mrvlgpu_device:chr_file { read write ioctl open };

@@ -1,0 +1,21 @@
+# create new domain mwirelessd
+type mwirelessd, domain;
+type mwirelessd_exec, exec_type, file_type;
+
+init_daemon_domain(mwirelessd)
+
+allow mwirelessd init:unix_stream_socket connectto;
+allow mwirelessd property_socket:sock_file write;
+allow mwirelessd self:capability { setuid setgid sys_module };
+allow mwirelessd shell_exec:file { read execute open execute_no_trans };
+allow mwirelessd sysfs:file write;
+allow mwirelessd system_data_file:dir { write remove_name add_name };
+allow mwirelessd system_data_file:sock_file { create unlink setattr };
+allow mwirelessd system_data_file:file { write create open };
+allow mwirelessd system_prop:property_service set;
+allow mwirelessd wireless_data_file:dir { write remove_name add_name search};
+allow mwirelessd wireless_data_file:file { write create open getattr };
+allow mwirelessd wireless_data_file:sock_file { create unlink setattr };
+allow mwirelessd nfc_device:chr_file { read getattr open };
+allow mwirelessd bluetooth_device:chr_file { read getattr open };
+

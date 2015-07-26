@@ -1,0 +1,5 @@
+# grant additional permissions to radio 
+allow radio rild_socket:sock_file write;
+allow radio system_prop:property_service set;
+allow radio mrvlgpu_device:chr_file { read write ioctl open };
+

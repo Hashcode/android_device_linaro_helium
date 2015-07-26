@@ -1,0 +1,19 @@
+# create new domain eeh
+type eeh, domain;
+type eeh_exec, exec_type, file_type;
+
+init_daemon_domain(eeh)
+
+allow eeh eeh_device:chr_file { read write ioctl open };
+allow eeh diag:unix_dgram_socket sendto;
+allow eeh eeh_tmpfs:file { create open };
+allow eeh self:capability { setuid setgid };
+allow eeh system_data_file:dir { read open };
+allow eeh tmpfs:dir { write add_name };
+allow eeh tmpfs:sock_file { write create setattr };
+allow eeh tmpfs:fifo_file { read write create open lock };
+
+# access to /NVM
+allow eeh nvm_data_file:dir { write add_name };
+allow eeh nvm_data_file:file { read write create open getattr };
+

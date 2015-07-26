@@ -1,0 +1,13 @@
+# for servicemanager
+allow servicemanager init:dir search;
+allow servicemanager init:file { read open };
+allow servicemanager init:process getattr;
+
+allow servicemanager FMRadiod:dir search;
+allow servicemanager FMRadiod:file { read open };
+allow servicemanager FMRadiod:process getattr;
+
+allow servicemanager phservice:dir search;
+allow servicemanager phservice:file { read open };
+allow servicemanager phservice:process getattr;
+

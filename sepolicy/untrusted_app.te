@@ -1,0 +1,28 @@
+# grant addtional permissions to untrusted_app
+
+# untrusted_app has to access the /dev/graphics/galcore to accelerate the graphics display.
+# but AOSP default policy has too restricted constrain on graphics_device access. Such as
+# 221 line of app.te :
+# 	Note: Try expanding list of app domains in the future.
+# 	neverallow { untrusted_app isolated_app shell } graphics_device:chr_file { read write };
+# read write is not allowed
+# So we name marvell gpu special label mrvlgpu for fully permission grant.
+allow untrusted_app mrvlgpu_device:chr_file rw_file_perms;
+
+# install app from USB
+# TODO: setattr is not allowed by dir
+# change the target dir and file to other labels. 
+# neverallow { appdomain -shell }
+#    shell_data_file:dir_file_class_set
+#    { create setattr relabelfrom relabelto append unlink link rename };
+allow untrusted_app shell_data_file:dir { write add_name remove_name };
+
+# TODO: all the actions are not allowed
+# shell_data_file is under /data/local/tmp/*
+# allow untrusted_app shell_data_file:file { create setattr unlink };
+
+# TODO: why some app want to map the low memory
+# it's related to dynamic loading libuuid.so
+# allow untrusted_app self:memprotect mmap_zero;
+allow untrusted_app self:shm { write unix_read unix_write associate read create };
+

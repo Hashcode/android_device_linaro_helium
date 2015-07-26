@@ -1,0 +1,4 @@
+# additional permissions for sdcardd
+
+allow sdcardd system_data_file:dir { read write open add_name };
+

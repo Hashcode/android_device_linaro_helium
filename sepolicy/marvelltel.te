@@ -1,0 +1,35 @@
+# create new domain marvelltel
+type marvelltel, domain;
+type marvelltel_exec, exec_type, file_type;
+
+init_daemon_domain(marvelltel)
+
+allow marvelltel ctl_default_prop:property_service set;
+allow marvelltel default_prop:property_service set;
+allow marvelltel init:unix_stream_socket connectto;
+allow marvelltel init_tmpfs:file { read lock open };
+allow marvelltel nvm_device:chr_file { write ioctl open };
+allow marvelltel property_socket:sock_file write;
+allow marvelltel radio_prop:property_service set;
+allow marvelltel self:capability { sys_module fowner chown fsetid dac_override };
+allow marvelltel shell_exec:file { read execute open };
+allow marvelltel shell_prop:property_service set;
+allow marvelltel sysfs:file { write setattr };
+allow marvelltel system_file:file execute_no_trans;
+allow marvelltel system_prop:property_service set;
+allow marvelltel tmpfs:dir { write create add_name setattr };
+allow marvelltel marvelltel_tmpfs:file { lock create open };
+
+allow marvelltel ctl_rildaemon_prop:property_service set;
+allow marvelltel nvm_data_file:dir search;
+
+# /dev/cpmem
+allow marvelltel marvelltel_device:chr_file { read write ioctl open };
+
+# /dev/block/mmcblk0p10
+allow marvelltel radio_block_device:blk_file { read open };
+# /dev/block/mmcblk0p1 
+allow marvelltel mrd_block_device:blk_file { read open };
+# /dev/block/mmcblk0p2
+allow marvelltel mrd1_block_device:blk_file { read open };
+

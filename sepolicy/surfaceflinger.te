@@ -1,0 +1,4 @@
+# for surfaceflinger
+allow surfaceflinger sysfs:file write;
+allow surfaceflinger mrvlgpu_device:chr_file rw_file_perms;
+

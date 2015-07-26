@@ -1,0 +1,8 @@
+
+#userdebug_or_eng(`
+#')
+
+allow shell device:dir { read open };
+allow shell mediaserver_device:chr_file getattr;
+allow shell serial_device:chr_file { read write getattr ioctl };
+

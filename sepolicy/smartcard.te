@@ -1,0 +1,6 @@
+# for smartcard
+type smartcard, domain;
+permissive smartcard;
+
+app_domain(smartcard)
+

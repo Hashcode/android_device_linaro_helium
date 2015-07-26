@@ -1,0 +1,3 @@
+# for cbc(aes)
+allow vold kernel:system module_request;
+

@@ -1,0 +1,5 @@
+# grant additional permission for wpa
+
+# /dev/rfkill
+allow wpa wpa_device:chr_file { read open };
+

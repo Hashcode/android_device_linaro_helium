@@ -1,0 +1,15 @@
+# create new domain diag
+type diag, domain;
+type diag_exec, exec_type, file_type;
+
+init_daemon_domain(diag)
+
+allow diag diag_device:chr_file { read write ioctl open };
+allow diag self:capability { setuid setgid dac_override };
+allow diag self:netlink_kobject_uevent_socket { read bind create };
+allow diag system_data_file:file { write open create };
+allow diag system_data_file:dir { write add_name };
+allow diag tmpfs:dir { write add_name };
+allow diag tmpfs:sock_file { create setattr };
+allow diag property_data_file:file read;
+

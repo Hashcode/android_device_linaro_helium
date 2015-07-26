@@ -1,0 +1,2 @@
+# grant addtional permission to adbd
+allow adbd mrvlgpu_device:chr_file { read write ioctl open };

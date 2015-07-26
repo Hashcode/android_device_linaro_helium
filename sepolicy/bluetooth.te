@@ -1,0 +1,9 @@
+# for bluetooth
+
+allow bluetooth bluetooth_device:chr_file { read write ioctl open };
+allow bluetooth mwirelessd:unix_stream_socket connectto;
+
+# /data/misc/wireless/socket_daemon
+allow bluetooth wireless_data_file:sock_file write;
+allow bluetooth mrvlgpu_device:chr_file { read write ioctl open };
+

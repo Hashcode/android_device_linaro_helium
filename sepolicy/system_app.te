@@ -1,0 +1,9 @@
+
+allow system_app system_app_device:chr_file { read getattr open };
+allow system_app phservice:binder call;
+allow system_app tmpfs:dir { write add_name };
+allow system_app tmpfs:sock_file create;
+
+allow system_app mrvlgpu_device:chr_file { read write ioctl open };
+allow system_app system_app_data_file:lnk_file read;
+

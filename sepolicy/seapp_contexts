@@ -1,0 +1,3 @@
+# for smartcard
+user=smartcard domain=smartcard type=smartcard_data_file
+

@@ -1,0 +1,8 @@
+##
+# This file defines Marvell's custom sepolicy related to zygote.
+##
+
+# Allow zygote to initialize galcore
+allow zygote mrvlgpu_device:chr_file { read write ioctl open };
+allow zygote mrvlgpu_device:dir search;
+allow zygote system_file:file execmod;

@@ -1,0 +1,182 @@
+import /init.pxa1928-target.rc
+import /init.pxa1928.usb.rc
+
+on early-init
+    write /proc/1/oom_score_adj -1000 # kernels >= 2.6.36
+    # set SEAndroid permissive mode at init
+    setenforce 0
+
+on init
+    loglevel 7
+
+    # Set this property so AdvancedWifiSettings would show the checkbox
+    # for Enable/Disable Active Roaming
+    setprop ro.wifi.active_roaming.enable true
+
+    # See storage config details at https://source.android.com/devices/storage/
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0700 root root
+    mkdir /storage/usbdisk 0700 root root
+
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+    export SECONDARY_STORAGE /storage/sdcard1
+
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    symlink /storage/usbdisk /usbdisk
+    symlink /storage/usbdisk /mnt/usbdisk
+
+    setprop persist.sys.display.format 1
+
+    chown system system /sys/class/graphics/fb0/device/vsync
+    chmod 0660 /sys/class/graphics/fb0/device/vsync
+
+    chown system system /sys/devices/platform/mmp-gps/ctrl
+
+    insmod /lib/modules/galcore.ko registerMemBase=0xd420d000 irqLine=113 registerMemBase2D=0xd420f000 irqLine2D=114 contiguousSize=0x2000000 pmemSize=0 showArgs=1
+
+    #for power hal
+    chown system system /sys/bus/i2c/devices/4-005d/power/control
+    chown system system /sys/bus/i2c/devices/4-0020/power/control
+    chown system system /sys/bus/i2c/devices/4-0022/power/control
+    chown system system /sys/devices/platform/mmp-fb/power/control
+    chown system system /sys/bus/i2c/devices/4-0010/power/control
+    chown system system /sys/bus/i2c/devices/4-0038/power/control
+    chown system system /sys/devices/platform/soc.1/d4200000.axi/fb.2/power/control
+    chown system system /sys/devices/platform/soc.1/d4200000.axi/d427f000.vdma/power/control
+    chown system system /sys/devices/platform/soc.1/d4200000.axi/d420b000.disp/power/control
+
+on fs
+    mount_all /fstab.pxa1928
+    setprop ro.crypto.fuse_sdcard true
+
+    # create /tmp directory
+    mkdir /tmp 0700 system system
+    mount tmpfs tmpfs /tmp mode=0700,uid=1000,gid=1000
+
+on post-fs-data
+    mkdir /data/media 0770 media_rw media_rw
+    mkdir /data/misc/gatord 0700 root root
+
+    # Set SELinux security contexts for files used by lava.
+    restorecon_recursive /data/local/tmp/lava
+
+    #for PowerDaemon
+    #cpu
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chmod 0664 /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    chmod 0444 /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+
+    #hotplug
+    chown system system /sys/devices/system/cpu/hotplug/bound_freq
+    chown system system /sys/devices/system/cpu/hotplug/load_h0
+    chown system system /sys/devices/system/cpu/hotplug/load_h1
+    chown system system /sys/devices/system/cpu/hotplug/load_h2
+    chown system system /sys/devices/system/cpu/hotplug/load_l1
+    chown system system /sys/devices/system/cpu/hotplug/load_l2
+    chown system system /sys/devices/system/cpu/hotplug/load_l3
+    chown system system /sys/devices/system/cpu/hotplug/lock
+    chown system system /sys/devices/system/cpu/cpu1/online
+    chown system system /sys/devices/system/cpu/cpu2/online
+    chown system system /sys/devices/system/cpu/cpu3/online
+
+    chmod 0644 /sys/devices/system/cpu/hotplug/bound_freq
+    chmod 0644 /sys/devices/system/cpu/hotplug/load_h0
+    chmod 0644 /sys/devices/system/cpu/hotplug/load_h1
+    chmod 0644 /sys/devices/system/cpu/hotplug/load_h2
+    chmod 0644 /sys/devices/system/cpu/hotplug/load_l1
+    chmod 0644 /sys/devices/system/cpu/hotplug/load_l2
+    chmod 0644 /sys/devices/system/cpu/hotplug/load_l3
+    chmod 0644 /sys/devices/system/cpu/hotplug/lock
+    chmod 0644 /sys/devices/system/cpu/cpu1/online
+    chmod 0644 /sys/devices/system/cpu/cpu2/online
+    chmod 0644 /sys/devices/system/cpu/cpu3/online
+
+    #ddr
+    chown system system /sys/class/devfreq/devfreq-ddr/polling_interval
+    chown system system /sys/class/devfreq/devfreq-ddr/min_freq
+    chown system system /sys/class/devfreq/devfreq-ddr/max_freq
+    chown system system /sys/class/devfreq/devfreq-ddr/governor
+    chown system system /sys/class/devfreq/devfreq-ddr/ddr_freq
+
+    #vpu
+    chown system system /sys/class/devfreq/devfreq-vpu.0/userspace/set_freq
+    chown system system /sys/class/devfreq/devfreq-vpu.0/min_freq
+    chown system system /sys/class/devfreq/devfreq-vpu.0/max_freq
+    chown system system /sys/class/devfreq/devfreq-vpu.0/governor
+    chown system system /sys/class/devfreq/devfreq-vpu.0/cur_freq
+    chown system system /sys/class/devfreq/devfreq-vpu.1/userspace/set_freq
+    chown system system /sys/class/devfreq/devfreq-vpu.1/min_freq
+    chown system system /sys/class/devfreq/devfreq-vpu.1/max_freq
+    chown system system /sys/class/devfreq/devfreq-vpu.1/governor
+    chown system system /sys/class/devfreq/devfreq-vpu.1/cur_freq
+
+    #gpu
+    chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_governor
+    chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_min_freq
+    chown system system /sys/devices/platform/galcore/gpu/gpu0/gpufreq/scaling_max_freq
+    chown system system /sys/devices/platform/galcore/gpu/gpu1/gpufreq/scaling_governor
+    chown system system /sys/devices/platform/galcore/gpu/gpu1/gpufreq/scaling_min_freq
+    chown system system /sys/devices/platform/galcore/gpu/gpu1/gpufreq/scaling_max_freq
+
+    # Set indication (checked by vold) that we have finished this action
+    setprop vold.post_fs_data_done 1
+
+on post-fs
+    # insert gator kernel module for DS-5/Streamline
+    insmod /system/lib/modules/gator.ko
+
+on boot
+    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+
+# virtual sdcard daemon running as media_rw (1023)
+service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+    class late_start
+
+service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+    class late_start
+    disabled
+
+service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
+    class late_start
+    disabled
+
+# create filesystem if necessary
+service setup_fs /system/bin/setup_fs \
+        /dev/block/platform/soc.1/by-name/userdata \
+        /dev/block/platform/soc.1/by-name/cache
+    class core
+    user root
+    group root
+    oneshot
+
+service phservice /system/bin/phservice
+    class main
+    user system
+    group system
+
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot

@@ -1,0 +1,10 @@
+# create new domain FMRadiod
+type FMRadiod, domain;
+type FMRadiod_exec, exec_type, file_type;
+
+init_daemon_domain(FMRadiod)
+
+allow FMRadiod self:capability { setuid setgid };
+allow FMRadiod servicemanager:binder { transfer call };
+allow FMRadiod fuse:file write;
+

@@ -1,0 +1,5 @@
+
+allow ueventd system_data_file:file open;
+allow ueventd wireless_data_file:dir search;
+allow ueventd wireless_data_file:file { read getattr open };
+

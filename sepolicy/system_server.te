@@ -1,0 +1,12 @@
+# for system_server
+allow system_server mrvlgpu_device:chr_file { read write ioctl open };
+allow system_server mwirelessd:unix_stream_socket connectto;
+allow system_server phservice:binder call;
+
+allow system_server nvm_data_file:dir getattr;
+allow system_server serial_device:chr_file { read write ioctl open };
+allow system_server shell_exec:file { read execute open execute_no_trans };
+allow system_server teesst_data_file:dir getattr;
+allow system_server default_prop:property_service set;
+allow system_server wireless_data_file:sock_file write;
+

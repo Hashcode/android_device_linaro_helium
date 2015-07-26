@@ -1,0 +1,11 @@
+
+type iml, domain;
+type iml_exec, exec_type, file_type;
+
+init_daemon_domain(iml)
+
+allow iml self:capability { setuid setgid };
+allow iml system_data_file:file { write open };
+allow iml tmpfs:dir { write add_name };
+allow iml tmpfs:sock_file { create setattr };
+

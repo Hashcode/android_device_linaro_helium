@@ -1,0 +1,4 @@
+# for wpa_supplicant
+allow netd kernel:system module_request;
+allow netd self:capability sys_module;
+

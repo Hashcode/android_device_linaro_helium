@@ -1,0 +1,18 @@
+# create new domain atcmdsrv
+type atcmdsrv, domain;
+type atcmdsrv_exec, exec_type, file_type;
+
+init_daemon_domain(atcmdsrv)
+
+allow atcmdsrv atcmdsrv_tmpfs:file { create open };
+allow atcmdsrv default_prop:property_service set;
+allow atcmdsrv atcmdsrv_device:chr_file { read write ioctl open };
+allow atcmdsrv diag:unix_dgram_socket sendto;
+allow atcmdsrv init:unix_stream_socket connectto;
+allow atcmdsrv nvm_device:chr_file { read write ioctl open };
+allow atcmdsrv property_socket:sock_file write;
+allow atcmdsrv self:capability setuid;
+allow atcmdsrv system_prop:property_service set;
+allow atcmdsrv tmpfs:dir { write add_name };
+allow atcmdsrv tmpfs:sock_file { write create setattr };
+
