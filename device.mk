@@ -69,6 +69,10 @@ PRODUCT_PACKAGES += \
     tinyplay \
     tinycap
 
+# HW graphic support requires libion
+PRODUCT_PACKAGES += \
+    libion
+
 # WI-Fi
 #PRODUCT_PACKAGES += \
 #    wpa_supplicant \
